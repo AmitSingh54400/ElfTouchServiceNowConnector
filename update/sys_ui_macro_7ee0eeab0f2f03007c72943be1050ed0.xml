@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="sys_ui_macro">
+    <sys_ui_macro action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <category>general</category>
+        <description/>
+        <media_type/>
+        <name>Nanoheal provision</name>
+        <scoped_name>x_179178_nanohealc_Nanoheal provision</scoped_name>
+        <sys_class_name>sys_ui_macro</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2018-01-15 10:35:54</sys_created_on>
+        <sys_id>7ee0eeab0f2f03007c72943be1050ed0</sys_id>
+        <sys_mod_count>17</sys_mod_count>
+        <sys_name>Nanoheal provision</sys_name>
+        <sys_package display_value="NanohealConnector" source="x_179178_nanohealc">9d0406230f2f03007c72943be1050e29</sys_package>
+        <sys_policy>protected</sys_policy>
+        <sys_scope display_value="NanohealConnector">9d0406230f2f03007c72943be1050e29</sys_scope>
+        <sys_update_name>sys_ui_macro_7ee0eeab0f2f03007c72943be1050ed0</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2018-03-01 06:58:12</sys_updated_on>
+        <xml><![CDATA[<?xml version="1.0" encoding="utf-8" ?>
+<j:jelly trim="false" xmlns:j="jelly:core" xmlns:g="glide" xmlns:j2="null" xmlns:g2="null">
+    <div id="errormessage4" style="display: none;margin-left: 40px;">Please Configure Nanoheal Application</div>
+	<div id="provisionTab" style="display: none;">
+        <div class="container">
+            <iframe id="provisioniframe" style="width: 100%;height: 500px;">Your browser doesn't support iframe</iframe>
+        </div>
+    </div>
+    <div id="errorTab4" style="display: none;">
+		<h5 style="margin-left: 15px;margin-bottom: 15px;" id="servicetagErrorMsg4">CI item is not selected. Please select Asset from CI or insert Service Tag below.</h5>
+		<div>
+			<div class="col-sm-4 col-md-4">
+				<input type="text" class="form-control" id="servicetag4" placeholder="ServiceTag" /><input type="button" class="btn btn-default servicetagBtn"
+					onclick="javascript:triggerAction(getProvision);javascript:triggerAction(getActionHistory);javascript:triggerAction(getBasicInfo);javascript:triggerAction(getNotificationData);javascript:triggerAction(getInterativeData);" value="Submit" id="servicetagBtn4" />
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript">
+
+        // Getting Action history from API
+        function getProvision(sessionData) {
+            var authorization = sessionData.Authorization, authToken = sessionData.AuthToken;
+
+            if (serviceTag == '') {
+                serviceTag = document.getElementById('servicetag4').value;
+            }
+            if (serviceTag != "") {
+                document.getElementById("errormessage4").style.display = "none";
+                document.getElementById("errorTab4").style.display = "none";
+                document.getElementById("provisionTab").style.display = "block";
+                var provisionRequest = new XMLHttpRequest();
+                var provisionResponse = null;
+                provisionRequest.onreadystatechange = function () {
+                    if (provisionRequest.readyState == XMLHttpRequest.DONE) {   // XMLHttpRequest.DONE == 4
+                        var actionHistoryHTML = "";
+                        if (provisionRequest.status == 200) {
+                            var doc = document.getElementById('provisioniframe').contentWindow.document;
+                            doc.open();
+                            doc.write(provisionRequest.responseText);
+                            doc.close();
+                        }
+                        //document.getElementById('clickList').innerHTML = toolboxlistHTML;
+                    }
+                    else if (provisionRequest.status == 400) {
+                        console.log('There was an error 400');
+                    }
+                    else {
+                        console.log('something else other than 200 was returned');
+                    }
+                }
+                try {
+                    if(authorization == "") throw "Authorization String Not set In Provision Request!";
+                    if(authToken == "") throw "Authtoken String Not set In Provision Request!";
+                    if(serviceTag == "") throw "Servicetag Not set In Provision Request!";
+                    provisionRequest.open("POST", baseUrl+"/api/profile/crmprovision");
+                    provisionRequest.setRequestHeader("Authorization", "Bearer " + authorization);
+                    provisionRequest.setRequestHeader("X-API-KEY", authToken);
+                    provisionRequest.send(JSON.stringify({"machine": serviceTag}));
+                } catch (error) {
+                    console.log(error);
+                }
+            }
+            else {
+                document.getElementById("errorTab4").style.display = "block";
+                document.getElementById("provisionTab").style.display = "none";
+            }
+        }
+         document.getElementById('servicetagBtn4').addEventListener('click', function() {
+            serviceTag = document.getElementById('servicetag4').value;
+            if (serviceTag == '') {
+                document.getElementById("servicetag4").style.borderColor = "red";
+            }
+        });
+</script>
+</j:jelly>]]></xml>
+    </sys_ui_macro>
+</record_update>

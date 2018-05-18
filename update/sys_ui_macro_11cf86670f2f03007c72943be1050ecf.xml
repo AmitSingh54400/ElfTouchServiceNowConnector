@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="sys_ui_macro">
+    <sys_ui_macro action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <category>general</category>
+        <description>This UI Macro used to Configure nanoheal</description>
+        <media_type/>
+        <name>Configure Nanoheal</name>
+        <scoped_name>x_179178_nanohealc_Configure Nanoheal</scoped_name>
+        <sys_class_name>sys_ui_macro</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2018-01-15 09:21:37</sys_created_on>
+        <sys_id>11cf86670f2f03007c72943be1050ecf</sys_id>
+        <sys_mod_count>45</sys_mod_count>
+        <sys_name>Configure Nanoheal</sys_name>
+        <sys_package display_value="NanohealConnector" source="x_179178_nanohealc">9d0406230f2f03007c72943be1050e29</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="NanohealConnector">9d0406230f2f03007c72943be1050e29</sys_scope>
+        <sys_update_name>sys_ui_macro_11cf86670f2f03007c72943be1050ecf</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2018-01-18 13:35:11</sys_updated_on>
+        <xml><![CDATA[<?xml version="1.0" encoding="utf-8" ?>
+<j:jelly trim="false" xmlns:j="jelly:core" xmlns:g="glide" xmlns:j2="null" xmlns:g2="null">
+<style>
+    .moreinfo {
+			padding-top: 4px;
+			height: auto;
+			min-height: 35px;
+			background: #48b2e4;
+			color: #ffff;
+			border-radius: 5px;
+			text-align: center;
+			font-size: 15px;
+			margin-left: 12%;
+			display: block;
+		}
+		
+    .moreinfo a {
+        color: #ffff;
+        text-decoration: none;
+    }
+</style>
+<div class="container">
+    <div class="row">
+        <div class="col-md-1"></div>
+    
+    <div class="col-md-2">
+    <div class="moreinfo"><a href="javascript:refreshConfig()">Validate/Refresh</a></div>
+    
+    </div>
+    <div class="col-md-2" id="loadingMsg" style="display:none;">
+        <img src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/fancybox_loading.gif" style="height: 30px;"/>
+    </div>
+    <div class="col-md-7" style="color:red;display:none;" id="errorMsg">
+        Something went wrong! please verify all the details
+    </div>
+    <div class="col-md-7" style="color:green;display:none;" id="successMsg">
+        Application Configurred successfully, please click on submit/Update to store configuration data!</div>
+    </div>
+</div>
+<hr/>
+<script type="text/javascript">
+var customernum = "";
+var uname = "";
+var pass = "";
+document.addEventListener('DOMContentLoaded', function () {
+    document.getElementById("x_179178_nanohealc_nanoheal_configuration.reporting_url").readOnly = true;
+    document.getElementById("x_179178_nanohealc_nanoheal_configuration.api_token").readOnly = true;
+    document.getElementById("x_179178_nanohealc_nanoheal_configuration.communication_channel").readOnly = true;
+    document.getElementById("x_179178_nanohealc_nanoheal_configuration.api_url").readOnly = true;
+});
+function refreshConfig(){
+    document.getElementById("errorMsg").style.display="none";
+    document.getElementById("successMsg").style.display="none";
+    document.getElementById("loadingMsg").style.display="block";
+    var reportingRequest = new XMLHttpRequest();
+    customernum = document.getElementById("x_179178_nanohealc_nanoheal_configuration.customer_number").value;
+    uname = document.getElementById("x_179178_nanohealc_nanoheal_configuration.username").value;
+    pass = document.getElementById("x_179178_nanohealc_nanoheal_configuration.password").value;
+    var terminate = false;
+    if(customernum == ""){
+        document.getElementById("x_179178_nanohealc_nanoheal_configuration.customer_number").style.borderColor = "#f95050";
+        terminate = true;
+    }
+    else{
+        document.getElementById("x_179178_nanohealc_nanoheal_configuration.customer_number").style.borderColor = "";
+    }
+    if(uname == ""){
+        document.getElementById("x_179178_nanohealc_nanoheal_configuration.username").style.borderColor = "#f95050";
+        terminate = true;
+    }
+    else{
+        document.getElementById("x_179178_nanohealc_nanoheal_configuration.username").style.borderColor = "";
+    }
+    if(pass == "") {
+        document.getElementById("x_179178_nanohealc_nanoheal_configuration.password").style.borderColor = "#f95050";
+        terminate = true;
+    }
+    else{
+        document.getElementById("x_179178_nanohealc_nanoheal_configuration.password").style.borderColor = "";
+    }
+    if(terminate){
+        document.getElementById("errorMsg").style.display="none";
+        document.getElementById("successMsg").style.display="none";
+        document.getElementById("loadingMsg").style.display="none";
+        return;
+    }
+    document.getElementById("x_179178_nanohealc_nanoheal_configuration.reporting_url").value = "";
+    document.getElementById("x_179178_nanohealc_nanoheal_configuration.communication_channel").value = "";
+    document.getElementById("x_179178_nanohealc_nanoheal_configuration.api_token").value = "";
+    document.getElementById("x_179178_nanohealc_nanoheal_configuration.api_url").value = "";
+    var reportingdata = "";
+    reportingRequest.onreadystatechange = function () {
+        if (reportingRequest.readyState == XMLHttpRequest.DONE) {   // XMLHttpRequest.DONE == 4
+            document.getElementById("loadingMsg").style.display="none";
+            if (reportingRequest.status == 200) {
+                reportingdata = reportingRequest.responseText;
+                reportingdata = JSON.parse(reportingdata);
+                try{
+                    if(reportingdata.status == 'sucess'){
+                        getToken(reportingdata.reportURL,  reportingdata.nodeURL, reportingdata.apiURL);
+                    }
+                    else{
+                        throw "Something went wrong!";
+                    }
+                }
+                catch(err){
+                    document.getElementById("errorMsg").style.display="block";
+                    console.log(err);
+                }
+            }   
+         }
+    }
+    try {
+        var params = {"custid":customernum,"act":"live"};
+        var requrl = "https://provision.nanoheal.com/provision/getCRMReportURL.php";
+        reportingRequest.open("POST", requrl);
+        reportingRequest.send(JSON.stringify(params));
+    } catch (error) {
+        document.getElementById("errorMsg").style.display="block";
+        document.getElementById("successMsg").style.display="none";
+        document.getElementById("loadingMsg").style.display="none";
+        console.log(error);
+    }
+    
+}
+
+function getToken(reportingUrl, communicationChannel, apiurl){
+     var validateCustomerRequest = new XMLHttpRequest();
+    var validateCustomerResponse = "";
+    var jwtToken = "";
+    validateCustomerRequest.onreadystatechange = function () {
+        if (validateCustomerRequest.readyState == XMLHttpRequest.DONE) {   // XMLHttpRequest.DONE == 4
+            if (validateCustomerRequest.status == 200) {
+                validateCustomerResponse = JSON.parse(validateCustomerRequest.responseText);
+                if(validateCustomerResponse.status == "Success"){
+                    jwtToken = validateCustomerResponse.Authorization;
+                    document.getElementById("x_179178_nanohealc_nanoheal_configuration.reporting_url").value = reportingUrl;
+                    document.getElementById("x_179178_nanohealc_nanoheal_configuration.communication_channel").value = communicationChannel;
+                    document.getElementById("x_179178_nanohealc_nanoheal_configuration.api_token").value = jwtToken;
+                    document.getElementById("x_179178_nanohealc_nanoheal_configuration.api_url").value = apiurl;
+                    document.getElementById("loadingMsg").style.display="none";
+                    document.getElementById("errorMsg").style.display="none";
+                    document.getElementById("successMsg").style.display="block";
+                }
+            }
+            else{
+                document.getElementById("successMsg").style.display="none";
+                document.getElementById("loadingMsg").style.display="none";
+                document.getElementById("errorMsg").style.display="block";
+            }
+        }
+    }
+    try {
+        if(reportingUrl == "") {
+            throw "Reporting URL is empty";
+        }
+        if(communicationChannel == "") throw "Communication channel is empty";
+        validateCustomerRequest.open("POST", apiurl+ "/api/validateCRMDetails");
+        validateCustomerRequest.send(JSON.stringify({"username":uname,"userpass":pass}));
+    } catch (error) {
+        console.log(error);
+        document.getElementById("successMsg").style.display="none";
+        document.getElementById("loadingMsg").style.display="none";
+        document.getElementById("errorMsg").style.display="block";
+    }
+}
+</script>
+</j:jelly>]]></xml>
+    </sys_ui_macro>
+</record_update>

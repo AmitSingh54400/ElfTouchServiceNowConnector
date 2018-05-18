@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update node_type="content_page" unload_date="2018-05-18 16:32:25">
+    <sys_portal action="delete_multiple" query="page=b13e2f920f7bc3007c72943be1050e05"/>
+    <content_page action="INSERT_OR_UPDATE">
+        <content_site/>
+        <content_theme display_value="Administration Theme - Charcoal">81140274ef331000914304167b2256fb</content_theme>
+        <description/>
+        <frame_buster>false</frame_buster>
+        <layout/>
+        <model_id/>
+        <model_table/>
+        <name>Nanoheal Configuration Page</name>
+        <order/>
+        <parent_page/>
+        <read_roles/>
+        <roles/>
+        <selectable>true</selectable>
+        <sys_class_name>content_page</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2018-01-24 05:30:45</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>b13e2f920f7bc3007c72943be1050e05</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Nanoheal Configuration Page</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="NanohealConnector" source="x_179178_nanohealc">9d0406230f2f03007c72943be1050e29</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="NanohealConnector">9d0406230f2f03007c72943be1050e29</sys_scope>
+        <sys_update_name>content_page_b13e2f920f7bc3007c72943be1050e05</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2018-01-24 05:30:45</sys_updated_on>
+        <title>Nanoheal Configuration | ServiceNow</title>
+        <url_suffix/>
+        <user/>
+        <view/>
+        <workflow_state>published</workflow_state>
+    </content_page>
+</record_update>

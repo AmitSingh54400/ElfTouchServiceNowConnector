@@ -1,0 +1,950 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="sys_ui_macro">
+    <sys_ui_macro action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <category>general</category>
+        <description>This macro is will display alll basic info of system</description>
+        <media_type/>
+        <name>Nanoheal Basic Info</name>
+        <scoped_name>x_179178_nanohealc_Nanoheal Basic Info</scoped_name>
+        <sys_class_name>sys_ui_macro</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2018-01-15 10:31:20</sys_created_on>
+        <sys_id>bfafd2ab0f2f03007c72943be1050e6c</sys_id>
+        <sys_mod_count>186</sys_mod_count>
+        <sys_name>Nanoheal Basic Info</sys_name>
+        <sys_package display_value="NanohealConnector" source="x_179178_nanohealc">9d0406230f2f03007c72943be1050e29</sys_package>
+        <sys_policy>protected</sys_policy>
+        <sys_scope display_value="NanohealConnector">9d0406230f2f03007c72943be1050e29</sys_scope>
+        <sys_update_name>sys_ui_macro_bfafd2ab0f2f03007c72943be1050e6c</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2018-05-18 16:24:30</sys_updated_on>
+        <xml><![CDATA[<?xml version="1.0" encoding="utf-8" ?>
+<j:jelly trim="false" xmlns:j="jelly:core" xmlns:g="glide" xmlns:j2="null" xmlns:g2="null">
+    <style>
+        .panelrow {
+            height: 25px;
+        }
+        
+        .panelrow:not(:last-child) {
+            border-bottom: 1px solid #ccc;
+        }
+        
+        .panelhead {
+            background: #48b2e4 !important;
+            color: #ffff !important;
+        }
+        
+        .moreinfo {
+            width: 90px;
+            padding-top: 4px;
+            height: auto;
+            min-height: 35px;
+            background: #48b2e4;
+            color: #ffff;
+            border-radius: 5px;
+            text-align: center;
+            font-size: 1.3em;
+            display: block;
+        }
+        
+        .moreinfo a {
+            color: #ffff;
+            text-decoration: none;
+        }
+        
+        .topheader {
+            border-style: solid;
+            border-color: #ddd;
+            margin-bottom: 15px;
+            margin-left: 3px;
+            padding-top: 15px;
+            padding-bottom: 5px;
+            width: 100%;
+            border-width: 1px;
+            background-color: #f5f5f5;
+        }
+        /* The Modal (background) */
+        
+        .modal {
+            display: none;
+            /* Hidden by default */
+            position: fixed;
+            /* Stay in place */
+            z-index: 999;
+            /* Sit on top */
+            padding-top: 100px;
+            /* Location of the box */
+            left: 0;
+            top: 0;
+            width: 100%;
+            /* Full width */
+            height: 100%;
+            /* Full height */
+            overflow: auto;
+            /* Enable scroll if needed */
+            background-color: rgb(0, 0, 0);
+            /* Fallback color */
+            background-color: rgba(0, 0, 0, 0.4);
+            /* Black w/ opacity */
+        }
+        /* Modal Content */
+        
+        .modal-content {
+            background-color: #fefefe;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 40%;
+        }
+        /* The Close Button */
+        
+        .close {
+            color: #aaaaaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        
+        .close:hover,
+        .close:focus {
+            color: #000;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        
+        .panel-heading {
+            padding: 5px 15px;
+        }
+        
+        .profile-img {
+            width: 96px;
+            height: 96px;
+            margin: 0 auto 10px;
+            display: block;
+            -moz-border-radius: 50%;
+            -webkit-border-radius: 50%;
+            border-radius: 50%;
+        }
+    </style>
+    <div class="sn-widget sn-widget_padding-top sn-widget-textblock sn-widget-textblock_large sn-widget-textblock_center navigator-loading-message" aria-hidden="true" id="loading">
+        <span class="icon-loading"></span>Loading...
+    </div>
+    <div id="errormessage" style="display: none;margin-left: 40px;">Please Configure Nanoheal Application</div>
+    <div id="info" style="display: none;margin-left: 40px;"></div>
+    <div id="basicInfoTab" style="display: none;">
+
+        <div class="container" style="width:100%;">
+            <div class="row topheader">
+                <div class="col-md-2 col-lg-2 col-sm-2 col-xs-2"><strong>Machine Name:</strong></div>
+                <div class="col-md-2 col-lg-2 col-sm-2 col-xs-2" id="machinename1"></div>
+                <div class="col-md-2 col-lg-2 col-sm-2 col-xs-2"><strong>Machine Status:</strong></div>
+                <div class="col-md-2 col-lg-2 col-sm-2 col-xs-2" id="machinestatus1"></div>
+
+                <div>
+                    <div class="export" localized="" style="display: block;float: right">
+                        <a href="javascript:;" onclick="triggerAction(getBasicInfo);">
+                            <span class="glyphicon glyphicon-refresh"></span> Refresh
+                        </a>
+                    </div>
+                </div>
+                <div>
+                    <div class="export" localized="" style="display: block;float: right">
+                        <a href="javascript:;" onclick="openDashboard();">
+                            Dashboard
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading panelhead">User Information</div>
+                <div class="panel-body">
+                    <div class="row panelrow">
+                        <div class="col-md-3 col-lg-3 col-sm-3 col-xs-3"><strong>Username:</strong></div>
+                        <div class="col-md-3 col-lg-3 col-sm-3 col-xs-3" id="basicinfo-username"></div>
+                        <div class="col-md-3 col-lg-3 col-sm-3 col-xs-3"><strong>Host Name:</strong></div>
+                        <div class="col-md-3 col-lg-3 col-sm-3 col-xs-3" id="basicinfo-hostname"></div>
+                    </div>
+                    <div class="row panelrow">
+                        <div class="col-md-3 col-lg-3 col-sm-3 col-xs-3"><strong>Domain:</strong></div>
+                        <div class="col-md-3 col-lg-3 col-sm-3 col-xs-3" id="basicinfo-domain"></div>
+                        <div class="col-md-3 col-lg-3 col-sm-3 col-xs-3"><strong>Site Name:</strong></div>
+                        <div class="col-md-3 col-lg-3 col-sm-3 col-xs-3" id="basicinfo-sitename"></div>
+                    </div>
+                    <div class="row panelrow">
+                        <div class="col-md-3 col-lg-3 col-sm-3 col-xs-3"><strong>Timezone:</strong></div>
+                        <div class="col-md-3 col-lg-3 col-sm-3 col-xs-3" id="basicinfo-timezone"></div>
+                        <div class="col-md-3 col-lg-3 col-sm-3 col-xs-3"><strong>IP Address:</strong></div>
+                        <div class="col-md-3 col-lg-3 col-sm-3 col-xs-3" id="basicinfo-ipaddress"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container" style="width:100%;">
+            <div class="row">
+                <div class="col-md-6 col-lg-6 col-sm-6 col-xs-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading panelhead">Hardware Information</div>
+                        <div class="panel-body">
+                            <div class="row panelrow">
+                                <div class="col-md-6 col-lg-6 col-sm-6 col-xs-6"><strong>Processor Manufacturer:</strong></div>
+                                <div class="col-md-6 col-lg-6 col-sm-6 col-xs-6" id="basicinfo-processmanufacturer"></div>
+                            </div>
+                            <div class="row panelrow">
+                                <div class="col-md-6 col-lg-6 col-sm-6 col-xs-6"><strong>Processor Type:</strong></div>
+                                <div class="col-md-6 col-lg-6 col-sm-6 col-xs-6" id="basicinfo-processortype"></div>
+                            </div>
+                            <div class="row panelrow">
+                                <div class="col-md-6 col-lg-6 col-sm-6 col-xs-6"><strong>Processor Version:</strong></div>
+                                <div class="col-md-6 col-lg-6 col-sm-6 col-xs-6" id="basicinfo-processorversion"></div>
+                            </div>
+                            <div class="row panelrow">
+                                <div class="col-md-6 col-lg-6 col-sm-6 col-xs-6"><strong>Vendor:</strong></div>
+                                <div class="col-md-6 col-lg-6 col-sm-6 col-xs-6" id="basicinfo-vendor"></div>
+                            </div>
+                            <div class="row panelrow">
+                                <div class="col-md-6 col-lg-6 col-sm-6 col-xs-6"><strong>Processor Current Speed:</strong></div>
+                                <div class="col-md-6 col-lg-6 col-sm-6 col-xs-6" id="basicinfo-processorcurrentspeed"></div>
+                            </div>
+                            <div class="row panelrow">
+                                <div class="col-md-6 col-lg-6 col-sm-6 col-xs-6"><strong>Processor Max Speed:</strong></div>
+                                <div class="col-md-6 col-lg-6 col-sm-6 col-xs-6" id="basicinfo-processormaxspeed"></div>
+                            </div>
+                            <div class="row panelrow">
+                                <div class="col-md-6 col-lg-6 col-sm-6 col-xs-6"><strong>Usable RAM(size in GB):</strong></div>
+                                <div class="col-md-6 col-lg-6 col-sm-6 col-xs-6" id="basicinfo-usableRAM"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-6 col-sm-6 col-xs-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading panelhead">Machine Information</div>
+                        <div class="panel-body">
+                            <div class="row panelrow">
+                                <div class="col-md-6 col-lg-6 col-sm-6 col-xs-6"><strong>Product Manufacturer:</strong></div>
+                                <div class="col-md-6 col-lg-6 col-sm-6 col-xs-6" id="basicinfo-productmanufacturer"></div>
+                            </div>
+                            <div class="row panelrow">
+                                <div class="col-md-6 col-lg-6 col-sm-6 col-xs-6"><strong>Product Name:</strong></div>
+                                <div class="col-md-6 col-lg-6 col-sm-6 col-xs-6" id="basicinfo-productname"></div>
+                            </div>
+                            <div class="row panelrow">
+                                <div class="col-md-6 col-lg-6 col-sm-6 col-xs-6"><strong>Machine Serial Number:</strong></div>
+                                <div class="col-md-6" id="basicinfo-machineserialnumber"></div>
+                            </div>
+                            <div class="row panelrow">
+                                <div class="col-md-6 col-lg-6 col-sm-6 col-xs-6"><strong>Machine Type:</strong></div>
+                                <div class="col-md-6 col-lg-6 col-sm-6 col-xs-6" id="basicinfo-machinetype"></div>
+                            </div>
+                            <div class="row panelrow">
+                                <div class="col-md-6 col-lg-6 col-sm-6 col-xs-6"><strong>Operating System:</strong></div>
+                                <div class="col-md-6 col-lg-6 col-sm-6 col-xs-6" id="basicinfo-operatingsystem"></div>
+                            </div>
+                            <div class="row panelrow">
+                                <div class="col-md-6 col-lg-6 col-sm-6 col-xs-6"><strong>Service Pack:</strong></div>
+                                <div class="col-md-6 col-lg-6 col-sm-6 col-xs-6" id="basicinfo-servicepack"></div>
+                            </div>
+                            <div class="row panelrow">
+                                <div class="col-md-6 col-lg-6 col-sm-6 col-xs-6"><strong>OS Type:</strong></div>
+                                <div class="col-md-6 col-lg-6 col-sm-6 col-xs-6" id="basicinfo-ostype"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="moreinfo">
+                <a href="javascript:;" onclick="triggerAction(getMoreInfo)">
+                    More Information
+                </a>
+            </div>
+            <div id="moreInfoNotAvailable" style="padding-top: 5px;color: red;display: none;"></div>
+        </div>
+    </div>
+    <div id="errorTab3" style="display: none;">
+        <h5 style="margin-left: 15px;margin-bottom: 15px;" id="servicetagErrorMsg3">CI item is not selected. Please select Asset from CI or insert Service Tag below.</h5>
+        <div>
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                <input type="text" class="form-control" id="servicetag2" placeholder="ServiceTag" /><input type="button"
+                    class="btn btn-default servicetagBtn" onclick="javascript:triggerAction(getBasicInfo);
+                                                                                                                   javascript:triggerAction(getActionHistory);
+                                                                                                                   javascript:triggerAction(getNotificationData);
+                                                                                                                   javascript:triggerAction(getInterativeData);
+//                                                                                                                   javascript:triggerAction(getProvision);"
+                    value="Submit" id="servicetagBtn2" />
+            </div>
+        </div>
+    </div>
+
+    <div id="myModal" class="modal">
+        <!-- Modal content -->
+        <div class="modal-content">
+            <span class="close glyphicon glyphicon-remove" onclick="document.getElementById('myModal').style.display = 'none';"></span>
+            <div class="row">
+                <div class="col-sm-11 col-md-11" style="padding-left: 10%;">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <strong> Sign in to continue</strong>
+                        </div>
+                        <div class="panel-body">
+                            <fieldset>
+                                <div class="row">
+                                    <div class="center-block">
+                                        <img class="profile-img" src="https://lh5.googleusercontent.com/-b0-k99FZlyE/AAAAAAAAAAI/AAAAAAAAAAA/eu7opA4byxI/photo.jpg?sz=120"
+                                            alt="" />
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-10  col-md-offset-1 ">
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <span class="input-group-addon">
+													<i class="glyphicon glyphicon-user"></i>
+												</span>
+                                                <input class="form-control" placeholder="Username" id="uname" name="loginname" type="text" autofocus="true" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <span class="input-group-addon">
+													<i class="glyphicon glyphicon-lock"></i>
+												</span>
+                                                <input class="form-control" placeholder="Password" id="upassword" name="password" type="password" value="" />
+                                            </div>
+                                        </div>
+                                        <div style="color: red;display: none;text-align: center;margin-bottom: 5px;" id="loginErrorMsg">
+                                            Please Verify Login Credentials.
+                                        </div>
+                                        <div style="display: none;text-align: center;margin-bottom: 5px;" id="loginLoadingMsg">
+                                            <img src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/fancybox_loading.gif" style="height: 30px;" />
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="button" class="btn btn-lg btn-primary btn-block" onclick="triggerAction(validateUser);" value="Sign in" id="validateUserLoginBtn" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script type="text/javascript">
+        if (typeof serviceTag === 'undefined')
+            var serviceTag = "";
+        if (typeof baseUrl === 'undefined')
+            var baseUrl = "";
+        if (typeof jwtToken === 'undefined')
+            var jwtToken = "";
+        if (typeof serviceNowUsername === 'undefined')
+            var serviceNowUsername = window.NOW.user_name;
+        if (typeof serviceNowUserEmail === 'undefined')
+            var serviceNowUserEmail = window.NOW.user_email;
+        if (typeof wsurl === 'undefined')
+            var wsurl = '';
+        if (typeof reportingurl === 'undefined')
+            var reportingurl = '';
+        if (typeof ws === 'undefined')
+            var ws = '';
+        var notificationdiv = "";
+        var ciname = "";
+        document.addEventListener('DOMContentLoaded', function () {
+            var authorization, authToken = "";
+
+            // Retrieving Configuration from DB and Validating
+            var nanoheal_config = new GlideRecord('x_179178_nanohealc_nanoheal_configuration');
+            nanoheal_config.query();   // Issue the query to the database to get relevant records  
+            if(nanoheal_config.next()) {
+                try {
+                    reportingurl = nanoheal_config.reporting_url;
+                    jwtToken = nanoheal_config.api_token;
+                    wsurl = nanoheal_config.communication_channel;
+                    baseUrl = nanoheal_config.api_url;
+                    if (jwtToken == "") throw "API Token Not set";
+                    if (baseUrl == "") throw "API Url Not set";
+                    document.getElementById("errormessage").style.display = "none";
+                    document.getElementById("errormessage1").style.display = "none";
+                    document.getElementById("errormessage2").style.display = "none";
+//                    document.getElementById("errormessage4").style.display = "none";
+                    document.getElementById("errormessage5").style.display = "none";
+                    if (ws === '') {
+                        if (window.location.protocol !== "https:") {
+                            wsconnect('ws://' + wsurl, reportingurl);
+                            console.log('Connecting to Communication Server : ' + 'http://' + wsurl);
+                        } else {
+                            wsconnect('wss://' + wsurl, reportingurl);
+                            console.log('Connecting to Communication Server : ' + 'https://' + wsurl);
+                        }
+                    } 
+                    else {
+                        console.log('Already Connected to Node');
+                    }
+                }
+                catch (e) {
+                    console.log("Error is");
+                    console.log(e);
+                    document.getElementById("errormessage").style.display = "block";
+                    document.getElementById("errormessage1").style.display = "block";
+                    document.getElementById("errormessage2").style.display = "block";
+//                    document.getElementById("errormessage4").style.display = "block";
+                    document.getElementById("errormessage5").style.display = "block";
+                }
+            }
+            else{
+                    document.getElementById("loading").style.display = "none";
+                    document.getElementById("loading1").style.display = "none";
+                    document.getElementById("loading2").style.display = "none";
+                    document.getElementById("loading5").style.display = "none";
+                    document.getElementById("errormessage").style.display = "block";
+                    document.getElementById("errormessage1").style.display = "block";
+                    document.getElementById("errormessage2").style.display = "block";
+//                document.getElementById("errormessage4").style.display = "block";
+                   document.getElementById("errormessage5").style.display = "block";
+		           return;
+            }
+           
+            // Retrieving Service Tag from DB and Validating
+            var config_item = new GlideRecord('cmdb_ci');
+            config_item.addQuery('sys_id', document.getElementById('incident.cmdb_ci').value);
+            config_item.query();   // Issue the query to the database to get relevant records  
+            if(config_item.next()) {
+                serviceTag = config_item.x_179178_nanohealc_nh_reference_id;
+                ciname = config_item.name;
+                if (existingsession = checkSessionValidity()) {
+                    validateServiceTag(existingsession);
+                }
+                else {
+                    createNewSession(validateServiceTag);
+                }
+            }
+            else{
+                try {
+                    var ele = document.getElementById('incident.x_179178_nanohealc_service_tag');
+                    if (typeof(ele) != 'undefined')
+                    {
+                        if(ele != null){
+                            serviceTag = ele.value;
+                            if(serviceTag != ""){
+                                triggerAction(getNotificationData);
+                                triggerAction(getBasicInfo);
+                                triggerAction(getActionHistory);
+                                triggerAction(getInterativeData);
+                                triggerAction(getProvision);
+                            }
+                            else{
+                                throw "Service Tag Empty";
+                            }
+                        }
+                        else{
+                            throw "Service Tag Empty";
+                        }
+                    }
+                    else{
+                        throw "Service Tag Empty";
+                    }
+                    document.getElementById("loading").style.display = "none";
+                    document.getElementById("loading1").style.display = "none";
+                    document.getElementById("loading2").style.display = "none";
+                    document.getElementById("loading5").style.display = "none";
+                }
+                catch (Err) {
+                    console.log(Err)
+                    var msg = "CI item is not selected. Please select Asset from CI or insert Service Tag below.";
+                    document.getElementById("servicetagErrorMsg").innerHTML = msg;
+                    document.getElementById("servicetagErrorMsg1").innerHTML = msg;
+                    document.getElementById("servicetagErrorMsg3").innerHTML = msg;
+//                    document.getElementById("servicetagErrorMsg4").innerHTML = msg;
+                    document.getElementById("servicetagErrorMsg5").innerHTML = msg;
+                    document.getElementById("errorTab").style.display = "block";
+                    document.getElementById("errorTab1").style.display = "block";
+                    document.getElementById("errorTab3").style.display = "block";
+//                    document.getElementById("errorTab4").style.display = "block";
+                    document.getElementById("errorTab5").style.display = "block";
+                    document.getElementById("loading").style.display = "none";
+                    document.getElementById("loading1").style.display = "none";
+                    document.getElementById("loading2").style.display = "none";
+                    document.getElementById("loading5").style.display = "none";
+                }
+            }
+        });
+
+        // Getting Action history from API
+        function getBasicInfo(sessionData) {
+            //getBasicInfo(errorTab3)
+            var authorization = sessionData.Authorization, authToken = sessionData.AuthToken;
+            if (serviceTag == '') {
+                serviceTag = document.getElementById('servicetag2').value;
+            }
+            if (serviceTag != "") {
+                document.getElementById("errormessage").style.display = "none";
+                document.getElementById("errorTab3").style.display = "none";
+                document.getElementById("basicInfoTab").style.display = "block";
+                var basicInfoRequest = new XMLHttpRequest();
+                var basicInfo = null;
+                document.getElementById("loading").style.display = "block";
+                basicInfoRequest.onreadystatechange = function () {
+                    if (basicInfoRequest.readyState == XMLHttpRequest.DONE) {   // XMLHttpRequest.DONE == 4
+                        document.getElementById("loading").style.display = "none";
+                        if (basicInfoRequest.status == 200) {
+                            basicInfo = JSON.parse(basicInfoRequest.responseText);
+                            if (basicInfo['status'] == "success") {
+
+                                // User Information
+                                document.getElementById('basicinfo-username').innerHTML = basicInfo['username'];
+                                document.getElementById('basicinfo-hostname').innerHTML = basicInfo['host'];
+                                document.getElementById('basicinfo-domain').innerHTML = basicInfo['domain'];
+                                document.getElementById('basicinfo-sitename').innerHTML = basicInfo['sitename'];
+                                document.getElementById('basicinfo-timezone').innerHTML = basicInfo['timezone'];
+                                document.getElementById('basicinfo-ipaddress').innerHTML = basicInfo['ipaddress'];
+
+                                //Hardware Information
+                                document.getElementById('basicinfo-processmanufacturer').innerHTML = basicInfo['processmanf'];
+                                document.getElementById('basicinfo-processortype').innerHTML = basicInfo['proceetype'];
+                                document.getElementById('basicinfo-processorversion').innerHTML = basicInfo['processmanf'];
+                                document.getElementById('basicinfo-vendor').innerHTML = basicInfo['biosvendor'];
+                                document.getElementById('basicinfo-processorcurrentspeed').innerHTML = basicInfo['processExtrclock'];
+                                document.getElementById('basicinfo-processormaxspeed').innerHTML = basicInfo['processMaxspeed'];
+                                document.getElementById('basicinfo-usableRAM').innerHTML = basicInfo['ramsize'];
+
+                                //Machine Information
+                                document.getElementById('basicinfo-productmanufacturer').innerHTML = basicInfo['systemManuf'];
+                                document.getElementById('basicinfo-productname').innerHTML = basicInfo['systemProduct'];
+                                document.getElementById('basicinfo-machineserialnumber').innerHTML = basicInfo['systemSerial'];
+                                document.getElementById('basicinfo-machinetype').innerHTML = basicInfo['chassistype'];
+                                document.getElementById('basicinfo-operatingsystem').innerHTML = basicInfo['os'];
+                                document.getElementById('basicinfo-servicepack').innerHTML = "-";
+                                document.getElementById('basicinfo-ostype').innerHTML = basicInfo['ntproducttype'];
+                            }
+
+                        }
+                        else if(basicInfoRequest.status == 401){
+                            basicInfo = JSON.parse(basicInfoRequest.responseText);
+                            document.getElementById('basicInfoTab').style.display = 'none';
+                            document.getElementById('info').innerHTML = basicInfo.msg;
+                            document.getElementById('info').style.display = 'block';
+                        }
+                        else{
+                            document.getElementById('basicInfoTab').style.display = 'none';
+                            document.getElementById('info').innerHTML = '<red>Something went wrong!</red>';
+                            document.getElementById('info').style.display = 'block';
+                        }
+                    }
+
+                }
+                try {
+                    if (authorization == "")
+                        throw "Authorization String Not set In Machine Basic Info Request!";
+                    if (authToken == "")
+                        throw "Authtoken String Not set In Machine Basic Info Request!";
+                    if (serviceTag == "")
+                        throw "Servicetag Not set In Machine Basic Info Request!";
+                    basicInfoRequest.open("POST", baseUrl + "/api/profile/machineBasicInfo");
+                    basicInfoRequest.setRequestHeader("Authorization", "Bearer " + authorization);
+                    basicInfoRequest.setRequestHeader("X-API-KEY", authToken);
+                    basicInfoRequest.send(JSON.stringify({ "machine": serviceTag, "AgentName": window.NOW.user_name, "AgentEmail": window.NOW.user_email}));
+                }
+                catch (e) {
+                    console.log(e);
+                }
+            }
+            else {
+                document.getElementById("errorTab3").style.display = "block";
+                document.getElementById("basicInfoTab").style.display = "none";
+            }
+        }
+
+        function checkSessionValidity() {
+            var stringValue = window.sessionStorage.getItem('nanohealSession');
+            if (stringValue !== null) {
+                var value = JSON.parse(stringValue);
+                var expirationDate = new Date(value.expirationDate);
+                if (expirationDate > new Date()) {
+                    return value.value;
+                } else {
+                    window.sessionStorage.removeItem('nanohealSession');
+                }
+            }
+            return null;
+        }
+
+        function createNewSession(callback) {
+            // createNewSession(callback)
+            var validateRequest = new XMLHttpRequest();
+            var validateResponse = "";
+            validateRequest.onreadystatechange = function () {
+                if (validateRequest.readyState == XMLHttpRequest.DONE) {   // XMLHttpRequest.DONE == 4
+                    if (validateRequest.status == 200) {
+                        try{
+                            validateResponse = JSON.parse(validateRequest.responseText);
+                            if(validateResponse.status !== "Success") throw "Invalid Login";
+                            var expirationDate = new Date(new Date().getTime() + (60000 * 14))
+                            var newValue = {
+                                value: validateResponse,
+                                expirationDate: expirationDate.toISOString()
+                            }
+                            window.sessionStorage.setItem('nanohealSession', JSON.stringify(newValue));
+                            if(callback){
+                                callback(validateResponse);
+                            }
+                            else{
+                                return validateResponse;
+                            }
+                        }
+                        catch(err){
+                            console.log("Nanoheal API Request Validation Failed. Please verify Nanoheal Configuration.!");
+                        }
+                    }
+                    else if (validateRequest.status == 400) {
+                        console.log('There was an error 400');
+                    }
+                    else {
+                        console.log('something else other than 200 was returned');
+                    }
+                }
+
+            }
+            try {
+                if(callback === false){
+                    async = false;
+                }
+                else{
+                    async = true;
+                }
+                if (jwtToken == "")
+                    throw "Token Empty";
+                validateRequest.open("POST", baseUrl + "/api/validateuser", async);
+                validateRequest.setRequestHeader("Authorization", "Bearer " + jwtToken);
+                validateRequest.send();
+                
+                return validateResponse;
+            } catch (error) {
+                console.log(error);
+                return false;
+            }
+
+        }
+
+        function wsconnect(wsurl, reportingurl) {
+            ws = new WebSocket(wsurl);
+            ws.onopen = function () {
+                console.log('Connecting to Communication Server Success');
+                var ConnectData = {};
+                ConnectData['Type'] = 'Dashboard';
+                ConnectData['AgentId'] = serviceNowUserEmail;
+                ConnectData['AgentName'] = window.NOW.user_name;
+                ConnectData['ReportingURL'] = reportingurl;
+                ws.send(JSON.stringify(ConnectData));
+            };
+            ws.onmessage = function (msg) {
+                ShowJobProgress(msg);
+            };
+            ws.onclose = function () {
+                setTimeout(function () {
+                    wsconnect(wsurl);
+                }, 2000);
+            };
+        }
+
+        // progress bar
+        function ShowJobProgress(JobStatus) {
+            var JsonMsg = JSON.parse(JobStatus.data);
+            var Status = JsonMsg.Status;
+            var ServiceTag = JsonMsg.ServiceTag;
+            if (typeof ServiceTag !== "undefined") {
+                if (ServiceTag.length > 0) {
+                    ServiceTag = ServiceTag.replace(/^\s+|\s+$/g, '');
+                }
+            }
+            serviceTag = serviceTag.replace(/^\s+|\s+$/g, '');
+            if (serviceTag !== ServiceTag) {
+                return;
+            }
+
+            if (Status === 'System Online' || JobStatus === 'System Offline' || JobStatus === '' || JobStatus === 'ADMessage') {
+                return;
+            }
+
+            var val = Status.split("=");
+            var i, k;
+            var liList = '<ul style="list-style-type: none;">';
+            var len = val.length;
+            if (Status.indexOf("Execution Completed") !== -1 || Status.indexOf("Execution Terminated") !== -1 || Status.indexOf("Execution Failed") !== -1) {
+                k = 4;
+            } else {
+                var cnt = val.length - 1;
+                for (i = 1; i != cnt; i++) {
+                    liList += '<li class="clearfix" style="height: 25px;"><div class="row" style="width:100%;"><div style="display:inline;">' + val[i].replace(/[0-9]/g, '') + '</div>';
+                    var statusVal = val[i + 1].charAt(0);
+                    if (statusVal === '1' || statusVal === 1) {
+                        liList += '<div style="float:right;text-align: right;margin-right: 2%;"><img src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/fancybox_loading.gif" alt="" style="height: 20px;"/></div>';
+                    } else if (statusVal === '2' || statusVal === 2) {
+                        liList += '<div style="float:right;text-align: right;margin-right: 2%;"><a href="#"><span style="color: #13933b;" class="glyphicon glyphicon-ok-circle"></span></a></div>';
+                    } else if (statusVal === '3' || statusVal === 3) {
+                        liList += '<div style="float:right;text-align: right;margin-right: 2%;"><img src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/fancybox_loading.gif" alt="" style="height: 20px;"/></div>';
+                    } else {
+                        liList += '<span  style="float:right;"></span>';
+                    }
+                    liList += '</div></li>';
+                    if (i === len - 2) {
+                        k = val[i + 1].charAt(0);
+                    }
+                }
+            }
+            liList += '</ul>';
+
+            if (Status === 'Execution Completed' || Status === 'Execution Terminated' || Status === 'Execution Failed' || Status === 'System Offline') {
+                if (Status === 'System Offline') {
+                    liList += '<span style="float:right;padding-right:10px;padding-bottom:5px;">System went Offline.</span>';
+                } else if (Status === 'Execution Completed') {
+                    liList += '<span style="float:right;padding-right:10px;padding-bottom:5px;">Solution has been executed successfully.</span>';
+                } else if (Status === 'Execution Terminated') {
+                    liList += '<span style="float:right;padding-right:10px;padding-bottom:5px;">Present solution has been cancelled.</span>';
+                }
+                else if (Status === 'Execution Failed') {
+                    liList += '<span style="float:right;padding-right:10px;padding-bottom:5px;">Solution Execution failed.</span>';
+                }
+            }
+            try {
+                document.getElementById(notificationdiv).innerHTML = liList;
+            }
+            catch (error) {
+                console.log("Failed to push Progress Bar message");
+            }
+        }
+
+        document.getElementById('servicetagBtn2').addEventListener('click', function () {
+            serviceTag = document.getElementById('servicetag2').value;
+            if (serviceTag == '') {
+                document.getElementById("servicetag2").style.borderColor = "red";
+            }
+        });
+
+        function getMoreInfo(sessionData) {
+            var authorization = sessionData.Authorization, authToken = sessionData.AuthToken;
+            document.getElementById("moreInfoNotAvailable").style.display = "none";
+            document.getElementById("moreInfoNotAvailable").innerHTML = "";
+            if (serviceTag == '') {
+                serviceTag = document.getElementById('servicetag2').value;
+            }
+            if (serviceTag != "") {
+                var getMoreInfoRequest = new XMLHttpRequest();
+                var getMoreInfoResponse = null;
+                getMoreInfoRequest.onreadystatechange = function () {
+                    if (getMoreInfoRequest.readyState == XMLHttpRequest.DONE) {   // XMLHttpRequest.DONE == 4
+                        if (getMoreInfoRequest.status == 200) {
+                            getMoreInfoResponse = JSON.parse(getMoreInfoRequest.responseText);
+                            if (getMoreInfoResponse.status == 'success') {
+                                var win = window.open(window.location.protocol + "//" + window.location.hostname + "/cmdb_ci_win_server.do?sys_id=" + getMoreInfoResponse.sys_id, '_blank');
+                                win.focus();
+                            }
+                            else {
+                                // Do nothing
+                                document.getElementById("moreInfoNotAvailable").innerHTML = "More Information Not Available";
+                                document.getElementById("moreInfoNotAvailable").style.display = "block";
+                            }
+                        }
+                        else if (getMoreInfoRequest.status == 400) {
+                            console.log('There was an error 400');
+                            document.getElementById("moreInfoNotAvailable").innerHTML = "Something Went Wrong";
+                            document.getElementById("moreInfoNotAvailable").style.display = "block";
+                        }
+                        else {
+                            console.log('something else other than 200 was returned');
+                            document.getElementById("moreInfoNotAvailable").innerHTML = "Something Went Wrong";
+                            document.getElementById("moreInfoNotAvailable").style.display = "block";
+                        }
+                    }
+
+                }
+                try {
+                    if (authorization == "")
+                        throw "Authorization String Not set In Machine Basic Info Request!";
+                    if (authToken == "")
+                        throw "Authtoken String Not set In Machine Basic Info Request!";
+                    if (serviceTag == "")
+                        throw "Servicetag Not set In Machine Basic Info Request!";
+                    getMoreInfoRequest.open("POST", baseUrl + "/api/profile/machineAssetID");
+                    getMoreInfoRequest.setRequestHeader("Authorization", "Bearer " + authorization);
+                    getMoreInfoRequest.setRequestHeader("X-API-KEY", authToken);
+                    getMoreInfoRequest.send(JSON.stringify({ "machine": serviceTag, "AgentName": window.NOW.user_name, "AgentEmail": window.NOW.user_email }));
+                }
+                catch (e) {
+                    console.log(e);
+                }
+            }
+            else {
+                document.getElementById("errorTab3").style.display = "block";
+                document.getElementById("basicInfoTab").style.display = "none";
+            }
+        }
+
+        function openDashboard() {
+            var nanoheal_user_credential = new GlideRecord('x_179178_nanohealc_nanoheal_user_credentials');
+            nanoheal_user_credential.addQuery('user_id', window.NOW.user_id);
+            nanoheal_user_credential.query();   // Issue the query to the database to get relevant records  
+            if(nanoheal_user_credential.next()) {
+                document.getElementById("uname").value = nanoheal_user_credential.user_name;
+                document.getElementById("upassword").value = nanoheal_user_credential.user_password;
+                document.getElementById('myModal').style.display = 'block';
+                document.getElementById("validateUserLoginBtn").click();
+            }
+            else{
+                document.getElementById('myModal').style.display = 'block';
+            }
+        }
+
+        function validateUser(sessionData) {
+            var authorization = sessionData.Authorization, authToken = sessionData.AuthToken;
+            document.getElementById("uname").style.borderColor = "";
+            document.getElementById("upassword").style.borderColor = "";
+            document.getElementById("loginErrorMsg").style.display = "none";
+            var uname = document.getElementById("uname").value;
+            if(uname == ""){
+                document.getElementById("uname").style.borderColor = "red";
+                document.getElementById("uname").focus();
+                return;
+            }
+            var pass = document.getElementById("upassword").value;
+            if(pass == ""){
+                document.getElementById("upassword").style.borderColor = "red";
+                document.getElementById("upassword").focus();
+                return;
+            }
+            document.getElementById("loginLoadingMsg").style.display = "block";
+            var validateCustomerRequest = new XMLHttpRequest();
+            var validateCustomerResponse = "";
+            validateCustomerRequest.onreadystatechange = function () {
+                if (validateCustomerRequest.readyState == XMLHttpRequest.DONE) {   // XMLHttpRequest.DONE == 4
+                    document.getElementById("loginLoadingMsg").style.display = "none";
+                    if (validateCustomerRequest.status == 200) {
+                        try {
+                            validateCustomerResponse = JSON.parse(validateCustomerRequest.responseText);
+                            if (validateCustomerResponse.status == "success") {
+                                var nanoheal_user_credential = new GlideRecord('x_179178_nanohealc_nanoheal_user_credentials');
+                                nanoheal_user_credential.addQuery('user_id', window.NOW.user_id);
+                                nanoheal_user_credential.query();   // Issue the query to the database to get relevant records  
+                                if(nanoheal_user_credential.next()) {
+                                    nanoheal_user_credential.user_name = uname;
+                                    nanoheal_user_credential.user_password = pass;
+                                    nanoheal_user_credential.update();
+                                }
+                                else{
+                                    nanoheal_user_credential.user_id = window.NOW.user_id;
+                                    nanoheal_user_credential.user_name = uname;
+                                    nanoheal_user_credential.user_password = pass;
+                                    nanoheal_user_credential.insert();
+                                }
+                                window.open(validateCustomerResponse.message,'_blank');
+                                document.getElementById('myModal').style.display = 'none';
+                            }
+                            else {
+                                throw "Something went wrong!";
+                            }
+                        }
+                        catch (err) {
+                            console.log(err);
+                            document.getElementById("loginErrorMsg").style.display = "block";
+                        }
+                    }
+                    else {
+                        document.getElementById("loginErrorMsg").style.display = "block";
+                    }
+                }
+            }
+            try {
+                if (baseUrl == "") throw "Base URL is empty";
+                validateCustomerRequest.open("POST", baseUrl + "/api/profile/UserAuthenticate");
+                validateCustomerRequest.setRequestHeader("Authorization", "Bearer " + authorization);
+                validateCustomerRequest.setRequestHeader("X-API-KEY", authToken);
+                validateCustomerRequest.send(JSON.stringify({"machine": serviceTag,"DsnUsername": uname, "Dsnpassword": pass }));
+            } catch (error) {
+                console.log(error);
+            }
+        }
+
+        var ci_id = document.getElementById('incident.cmdb_ci').value;
+        setInterval(function() { 
+            var cmdb_ci = document.getElementById('incident.cmdb_ci').value;
+            if(cmdb_ci != ci_id){
+                var config_item = new GlideRecord('cmdb_ci');
+                config_item.addQuery('sys_id', cmdb_ci);
+                config_item.query();   // Issue the query to the database to get relevant records  
+                if(config_item.next()) {
+                    serviceTag = config_item.x_179178_nanohealc_nh_reference_id;
+                    ciname = config_item.name;
+                    if (existingsession = checkSessionValidity()) {
+                        validateServiceTag(existingsession);
+                    }
+                    else {
+                        createNewSession(validateServiceTag);
+                    }
+                }
+            }
+            else{
+                // Do nothing
+            }
+        }, 1000);
+
+
+         function triggerAction(callback){
+             if (existingsession = checkSessionValidity()) {
+                 callback(existingsession);
+             }
+             else{
+                 createNewSession(callback);
+             }
+         }
+         
+         function validateServiceTag(sessionData){
+            var authorization = sessionData.Authorization, authToken = sessionData.AuthToken;
+            var validateServiceTag = new XMLHttpRequest();
+            var validateServiceTagResponse = null;
+            validateServiceTag.onreadystatechange = function () {
+                if (validateServiceTag.readyState == XMLHttpRequest.DONE) {
+                    validateServiceTagResponse = JSON.parse(validateServiceTag.responseText);
+                    if(validateServiceTagResponse.machinestatus == "Nanoheal not installed on device"){
+                        var stag =  serviceTag;
+                        if(serviceTag == "")
+                            stag = "-";
+                        var msg = "CI with Name "+ciname+"(Service Tag: ' "+stag+" ') Is Not Present On Nanoheal";
+                        document.getElementById("servicetagErrorMsg").innerHTML = msg;
+                        document.getElementById("servicetagErrorMsg1").innerHTML = msg;
+                        document.getElementById("servicetagErrorMsg3").innerHTML = msg;
+//                        document.getElementById("servicetagErrorMsg4").innerHTML = msg;
+                        document.getElementById("servicetagErrorMsg5").innerHTML = msg;
+                        document.getElementById("errorTab").style.display = "block";
+                        document.getElementById("errorTab1").style.display = "block";
+                        document.getElementById("errorTab3").style.display = "block";
+//                        document.getElementById("errorTab4").style.display = "block";
+                        document.getElementById("errorTab5").style.display = "block";
+                    }
+                    else{
+                        document.getElementById("machinestatus1").innerHTML = validateServiceTagResponse.machinestatus;
+                        document.getElementById("machinename1").innerHTML = validateServiceTagResponse.machinename;
+                        document.getElementById("machinestatus2").innerHTML = validateServiceTagResponse.machinestatus;
+                        document.getElementById("machinename2").innerHTML = validateServiceTagResponse.machinename;
+                        document.getElementById("machinestatus3").innerHTML = validateServiceTagResponse.machinestatus;
+                        document.getElementById("machinename3").innerHTML = validateServiceTagResponse.machinename;
+//                        document.getElementById("machinestatus4").innerHTML = validateServiceTagResponse.machinestatus;
+                        document.getElementById("machinename4").innerHTML = validateServiceTagResponse.machinename;
+                        triggerAction(getNotificationData);
+                        triggerAction(getBasicInfo);
+                        triggerAction(getActionHistory);
+                        triggerAction(getInterativeData);
+//                        triggerAction(getProvision);
+                    }
+                }
+            }
+            validateServiceTag.open("POST", baseUrl + "/api/profile/machineOnlineStatus");
+            validateServiceTag.setRequestHeader("Authorization", "Bearer " + authorization);
+            validateServiceTag.setRequestHeader("X-API-KEY", authToken);
+            validateServiceTag.send(JSON.stringify({ "machine": serviceTag }));
+         }
+                
+    </script>
+</j:jelly>]]></xml>
+    </sys_ui_macro>
+</record_update>
