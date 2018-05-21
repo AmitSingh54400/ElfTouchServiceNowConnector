@@ -11,14 +11,14 @@
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2018-01-15 10:31:20</sys_created_on>
         <sys_id>bfafd2ab0f2f03007c72943be1050e6c</sys_id>
-        <sys_mod_count>186</sys_mod_count>
+        <sys_mod_count>187</sys_mod_count>
         <sys_name>Nanoheal Basic Info</sys_name>
         <sys_package display_value="NanohealConnector" source="x_179178_nanohealc">9d0406230f2f03007c72943be1050e29</sys_package>
         <sys_policy>protected</sys_policy>
         <sys_scope display_value="NanohealConnector">9d0406230f2f03007c72943be1050e29</sys_scope>
         <sys_update_name>sys_ui_macro_bfafd2ab0f2f03007c72943be1050e6c</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2018-05-18 16:24:30</sys_updated_on>
+        <sys_updated_on>2018-05-21 07:07:29</sys_updated_on>
         <xml><![CDATA[<?xml version="1.0" encoding="utf-8" ?>
 <j:jelly trim="false" xmlns:j="jelly:core" xmlns:g="glide" xmlns:j2="null" xmlns:g2="null">
     <style>
@@ -270,7 +270,7 @@
                                                                                                                    javascript:triggerAction(getActionHistory);
                                                                                                                    javascript:triggerAction(getNotificationData);
                                                                                                                    javascript:triggerAction(getInterativeData);
-//                                                                                                                   javascript:triggerAction(getProvision);"
+                                                                                                                   javascript:triggerAction(getProvision);"
                     value="Submit" id="servicetagBtn2" />
             </div>
         </div>
@@ -368,7 +368,7 @@
                     document.getElementById("errormessage").style.display = "none";
                     document.getElementById("errormessage1").style.display = "none";
                     document.getElementById("errormessage2").style.display = "none";
-//                    document.getElementById("errormessage4").style.display = "none";
+                    document.getElementById("errormessage4").style.display = "none";
                     document.getElementById("errormessage5").style.display = "none";
                     if (ws === '') {
                         if (window.location.protocol !== "https:") {
@@ -389,7 +389,7 @@
                     document.getElementById("errormessage").style.display = "block";
                     document.getElementById("errormessage1").style.display = "block";
                     document.getElementById("errormessage2").style.display = "block";
-//                    document.getElementById("errormessage4").style.display = "block";
+                    document.getElementById("errormessage4").style.display = "block";
                     document.getElementById("errormessage5").style.display = "block";
                 }
             }
@@ -397,12 +397,13 @@
                     document.getElementById("loading").style.display = "none";
                     document.getElementById("loading1").style.display = "none";
                     document.getElementById("loading2").style.display = "none";
+                    document.getElementById("loading4").style.display = "none";
                     document.getElementById("loading5").style.display = "none";
                     document.getElementById("errormessage").style.display = "block";
                     document.getElementById("errormessage1").style.display = "block";
                     document.getElementById("errormessage2").style.display = "block";
-//                document.getElementById("errormessage4").style.display = "block";
-                   document.getElementById("errormessage5").style.display = "block";
+                    document.getElementById("errormessage4").style.display = "block";
+                    document.getElementById("errormessage5").style.display = "block";
 		           return;
             }
            
@@ -448,6 +449,7 @@
                     document.getElementById("loading").style.display = "none";
                     document.getElementById("loading1").style.display = "none";
                     document.getElementById("loading2").style.display = "none";
+                    document.getElementById("loading4").style.display = "none";
                     document.getElementById("loading5").style.display = "none";
                 }
                 catch (Err) {
@@ -456,16 +458,17 @@
                     document.getElementById("servicetagErrorMsg").innerHTML = msg;
                     document.getElementById("servicetagErrorMsg1").innerHTML = msg;
                     document.getElementById("servicetagErrorMsg3").innerHTML = msg;
-//                    document.getElementById("servicetagErrorMsg4").innerHTML = msg;
+                    document.getElementById("servicetagErrorMsg4").innerHTML = msg;
                     document.getElementById("servicetagErrorMsg5").innerHTML = msg;
                     document.getElementById("errorTab").style.display = "block";
                     document.getElementById("errorTab1").style.display = "block";
                     document.getElementById("errorTab3").style.display = "block";
-//                    document.getElementById("errorTab4").style.display = "block";
+                    document.getElementById("errorTab4").style.display = "block";
                     document.getElementById("errorTab5").style.display = "block";
                     document.getElementById("loading").style.display = "none";
                     document.getElementById("loading1").style.display = "none";
                     document.getElementById("loading2").style.display = "none";
+                    document.getElementById("loading4").style.display = "none";
                     document.getElementById("loading5").style.display = "none";
                 }
             }
@@ -913,12 +916,12 @@
                         document.getElementById("servicetagErrorMsg").innerHTML = msg;
                         document.getElementById("servicetagErrorMsg1").innerHTML = msg;
                         document.getElementById("servicetagErrorMsg3").innerHTML = msg;
-//                        document.getElementById("servicetagErrorMsg4").innerHTML = msg;
+                        document.getElementById("servicetagErrorMsg4").innerHTML = msg;
                         document.getElementById("servicetagErrorMsg5").innerHTML = msg;
                         document.getElementById("errorTab").style.display = "block";
                         document.getElementById("errorTab1").style.display = "block";
                         document.getElementById("errorTab3").style.display = "block";
-//                        document.getElementById("errorTab4").style.display = "block";
+                        document.getElementById("errorTab4").style.display = "block";
                         document.getElementById("errorTab5").style.display = "block";
                     }
                     else{
@@ -928,13 +931,13 @@
                         document.getElementById("machinename2").innerHTML = validateServiceTagResponse.machinename;
                         document.getElementById("machinestatus3").innerHTML = validateServiceTagResponse.machinestatus;
                         document.getElementById("machinename3").innerHTML = validateServiceTagResponse.machinename;
-//                        document.getElementById("machinestatus4").innerHTML = validateServiceTagResponse.machinestatus;
+                        document.getElementById("machinestatus4").innerHTML = validateServiceTagResponse.machinestatus;
                         document.getElementById("machinename4").innerHTML = validateServiceTagResponse.machinename;
                         triggerAction(getNotificationData);
                         triggerAction(getBasicInfo);
                         triggerAction(getActionHistory);
                         triggerAction(getInterativeData);
-//                        triggerAction(getProvision);
+                        triggerAction(getProvision);
                     }
                 }
             }
