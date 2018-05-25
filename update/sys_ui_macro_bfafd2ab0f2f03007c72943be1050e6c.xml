@@ -11,14 +11,14 @@
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2018-01-15 10:31:20</sys_created_on>
         <sys_id>bfafd2ab0f2f03007c72943be1050e6c</sys_id>
-        <sys_mod_count>277</sys_mod_count>
+        <sys_mod_count>278</sys_mod_count>
         <sys_name>Nanoheal Basic Info</sys_name>
         <sys_package display_value="NanohealConnector" source="x_179178_nanohealc">9d0406230f2f03007c72943be1050e29</sys_package>
         <sys_policy>protected</sys_policy>
         <sys_scope display_value="NanohealConnector">9d0406230f2f03007c72943be1050e29</sys_scope>
         <sys_update_name>sys_ui_macro_bfafd2ab0f2f03007c72943be1050e6c</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2018-05-25 10:45:53</sys_updated_on>
+        <sys_updated_on>2018-05-25 13:37:19</sys_updated_on>
         <xml><![CDATA[<?xml version="1.0" encoding="utf-8" ?>
 <j:jelly trim="false" xmlns:j="jelly:core" xmlns:g="glide" xmlns:j2="null" xmlns:g2="null">
     <style>
@@ -1065,23 +1065,23 @@
                                         document.getElementById("sitelistDiv5").style.display = "block";
                                         var opt1 = document.createElement('option');
                                         opt1.value = machineDetails.msg[0].site;
-                                        opt1.textContent = machineDetails.msg[0].site;
+                                        opt1.textContent = machineDetails.msg[0].displaySitename;
                                         opt1.selected = true;
                                         document.getElementById('sitelist1').appendChild(opt1);
                                         var opt2 = document.createElement('option');
                                         opt2.value = machineDetails.msg[0].site;
-                                        opt2.textContent = machineDetails.msg[0].site;
+                                        opt2.textContent = machineDetails.msg[0].displaySitename;
                                         opt2.selected = true;
                                         document.getElementById('sitelist2').appendChild(opt2);
                                         var opt3 = document.createElement('option');
                                         opt3.value = machineDetails.msg[0].site;
-                                        opt3.textContent = machineDetails.msg[0].site;
+                                        opt3.textContent = machineDetails.msg[0].displaySitename;
                                         opt3.selected = true;
                                         document.getElementById('sitelist3').appendChild(opt3);
                                         var opt5 = document.createElement('option');
                                         opt5.value = machineDetails.msg[0].site;
                                         opt5.selected = true;
-                                        opt5.textContent = machineDetails.msg[0].site;
+                                        opt5.textContent = machineDetails.msg[0].displaySitename;
                                         document.getElementById('sitelist5').appendChild(opt5);
                                         passlevel = machineDetails.msg[0].site
                                         triggerAction(validateServiceTag);
@@ -1097,19 +1097,19 @@
                                         for (var i = 0; i != siteCount; i++) {
                                             var opt1 = document.createElement('option');
                                             opt1.value = machineDetails.msg[i].site;
-                                            opt1.textContent = machineDetails.msg[i].site;
+                                            opt1.textContent = machineDetails.msg[i].displaySitename;
                                             document.getElementById('sitelist1').appendChild(opt1);
                                             var opt2 = document.createElement('option');
                                             opt2.value = machineDetails.msg[i].site;
-                                            opt2.textContent = machineDetails.msg[i].site;
+                                            opt2.textContent = machineDetails.msg[i].displaySitename;
                                             document.getElementById('sitelist2').appendChild(opt2);
                                             var opt3 = document.createElement('option');
                                             opt3.value = machineDetails.msg[i].site;
-                                            opt3.textContent = machineDetails.msg[i].site;
+                                            opt3.textContent = machineDetails.msg[i].displaySitename;
                                             document.getElementById('sitelist3').appendChild(opt3);
                                             var opt5 = document.createElement('option');
                                             opt5.value = machineDetails.msg[i].site;
-                                            opt5.textContent = machineDetails.msg[i].site;
+                                            opt5.textContent = machineDetails.msg[i].displaySitename;
                                             document.getElementById('sitelist5').appendChild(opt5);
                                         }
                                     }
