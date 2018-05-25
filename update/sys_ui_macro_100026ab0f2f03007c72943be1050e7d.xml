@@ -11,14 +11,14 @@
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2018-01-15 10:32:20</sys_created_on>
         <sys_id>100026ab0f2f03007c72943be1050e7d</sys_id>
-        <sys_mod_count>101</sys_mod_count>
+        <sys_mod_count>113</sys_mod_count>
         <sys_name>Nanoheal Notification</sys_name>
         <sys_package display_value="NanohealConnector" source="x_179178_nanohealc">9d0406230f2f03007c72943be1050e29</sys_package>
         <sys_policy>protected</sys_policy>
         <sys_scope display_value="NanohealConnector">9d0406230f2f03007c72943be1050e29</sys_scope>
         <sys_update_name>sys_ui_macro_100026ab0f2f03007c72943be1050e7d</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2018-05-14 13:46:08</sys_updated_on>
+        <sys_updated_on>2018-05-25 10:42:01</sys_updated_on>
         <xml><![CDATA[<?xml version="1.0" encoding="utf-8" ?>
 <j:jelly trim="false" xmlns:j="jelly:core" xmlns:g="glide" xmlns:j2="null" xmlns:g2="null">
     <style>
@@ -35,16 +35,33 @@
             text-decoration: none;
         }
     </style>
-    <div class="sn-widget sn-widget_padding-top sn-widget-textblock sn-widget-textblock_large sn-widget-textblock_center navigator-loading-message" aria-hidden="true" id="loading1">
+    <div class="sn-widget sn-widget_padding-top sn-widget-textblock sn-widget-textblock_large sn-widget-textblock_center navigator-loading-message" aria-hidden="true" id="loading3">
         <span class="icon-loading"></span>Loading...
     </div>
-    <div id="errormessage1" style="display: none;margin-left: 40px;">Please Configure Nanoheal Application</div>
-    <div id="info1" style="display: none;margin-left: 40px;"></div>
-    <div id="notificationTab" style="display: none;">
+    <div id="errormessage3" class="info-text" style="display: none;">Please Configure Nanoheal Application</div>
+    <div id="info3" class="info-text"></div>
+    <div id="errorTab3" style="display: none;">
+       <h5 class="info-text" id="servicetagErrorMsg3">CI item is not selected. Please select Asset from CI or insert Service Tag below.</h5>
+        <div class="row info-text">
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                <input type="text" class="form-control" id="servicetag3" placeholder="ServiceTag" />
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" id="sitelistDiv3" style="display: none;">
+                <select class="form-control" id="sitelist3">
+                    <option value="">Select Site</option>
+                </select>
+            </div>
+            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+            <input type="button" class="btn btn-default" onclick="currentTab=3;triggerAction(getMachineDetails)"
+                    value="Submit" id="servicetagBtn3" />
+            </div>
+        </div>
+    </div>
+    <div id="notificationTab" style="display: none;margin-top: 10px;">
         <div class="container" style="width:100%;">
         <div class="row topheader">
-            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2"><strong>Machine Name:</strong></div> <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2" id="machinename2"></div>
-            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2"><strong>Machine Status:</strong></div> <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2" id="machinestatus2"></div>
+            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2"><strong>Machine Name:</strong></div> <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2" id="machinename3"></div>
+            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2"><strong>Machine Status:</strong></div> <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2" id="machinestatus3"></div>
             <div>
                 <div class="export" localized="" style="display: block;float: right">
                     <a href="javascript:;" onclick="triggerAction(getNotificationData);">
@@ -85,14 +102,7 @@
         </div>
         </div>
     </div>
-    <div id="errorTab" style="display: none;">
-        <h5 style="margin-left: 15px;margin-bottom: 15px;" id="servicetagErrorMsg">CI item is not selected. Please select Asset from CI or insert Service Tag below.</h5>
-        <div>
-            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                <input type="text" class="form-control" id="servicetag" placeholder="ServiceTag"/><input type="button" class="btn btn-default servicetagBtn" onclick="javascript:triggerAction(getNotificationData);javascript:triggerAction(getActionHistory);javascript:triggerAction(getBasicInfo);javascript:triggerAction(getInterativeData);//javascript:triggerAction(getProvision);" value="Submit" id="servicetagBtn" />
-            </div>
-        </div>
-    </div>
+    
 
     <script type="text/javascript">
         
@@ -104,17 +114,17 @@
         function getNotificationData(sessionData) {
             var authorization = sessionData.Authorization, authToken = sessionData.AuthToken;
             if (serviceTag == '') {
-                serviceTag = document.getElementById('servicetag').value;
+                serviceTag = document.getElementById('servicetag3').value;
             }
             if (serviceTag != "") {
-                document.getElementById("errormessage1").style.display = "none";
-                document.getElementById("errorTab").style.display = "none";
+                document.getElementById("errormessage3").style.display = "none";
+                //document.getElementById("errorTab3").style.display = "none";
                 // Get Notification Data
                 var getNotificationRequest = new XMLHttpRequest();
-                document.getElementById("loading1").style.display = "block";
+                document.getElementById("loading3").style.display = "block";
                 getNotificationRequest.onreadystatechange = function () {
                     if (getNotificationRequest.readyState == XMLHttpRequest.DONE) {   // XMLHttpRequest.DONE == 4
-                        document.getElementById("loading1").style.display = "none";
+                        document.getElementById("loading3").style.display = "none";
                         if (getNotificationRequest.status == 200) {
                             notificationResponse = JSON.parse(getNotificationRequest.responseText);
                             document.getElementById("criticalCnt").innerHTML = notificationResponse.criticalcnt;
@@ -126,8 +136,8 @@
                             document.getElementById("machinename2").innerHTML = notificationResponse.machinename;
                             document.getElementById("machinestatus3").innerHTML = notificationResponse.machinestatus;
                             document.getElementById("machinename3").innerHTML = notificationResponse.machinename;
-                            document.getElementById("machinestatus4").innerHTML = notificationResponse.machinestatus;
-                            document.getElementById("machinename4").innerHTML = notificationResponse.machinename;
+                            document.getElementById("machinestatus5").innerHTML = notificationResponse.machinestatus;
+                            document.getElementById("machinename5").innerHTML = notificationResponse.machinename;
                             var criticalHtml = '';
                             var majorHtml = '';
                             var minorHtml = '';
@@ -196,13 +206,13 @@
                         else if(getNotificationRequest.status == 401){
                             notificationResponse = JSON.parse(getNotificationRequest.responseText);
                             document.getElementById('notificationTab').style.display = 'none';
-                            document.getElementById('info1').innerHTML = notificationResponse.msg;
-                            document.getElementById('info1').style.display = 'block';
+                            document.getElementById('info3').innerHTML = notificationResponse.msg;
+                            document.getElementById('info3').style.display = 'block';
                         }
                         else{
                             document.getElementById('notificationTab').style.display = 'none';
-                            document.getElementById('info1').innerHTML = "<red>Something went wrong!</red>";
-                            document.getElementById('info1').style.display = 'block';
+                            document.getElementById('info3').innerHTML = "<red>Something went wrong!</red>";
+                            document.getElementById('info3').style.display = 'block';
                         }
                     }
                 };
@@ -213,14 +223,14 @@
                     getNotificationRequest.open("POST", baseUrl+"/api/notification/getNotificationSummary");
                     getNotificationRequest.setRequestHeader("Authorization", "Bearer " + authorization);
                     getNotificationRequest.setRequestHeader("X-API-KEY", authToken);
-                    getNotificationRequest.send(JSON.stringify({"scopvalue": serviceTag, "AgentName": window.NOW.user_name, "AgentEmail": window.NOW.user_email}));
+                    getNotificationRequest.send(JSON.stringify({ "scop": "machine", "scopvalue": serviceTag, "passlevel": passlevel, "AgentName": window.NOW.user_name, "AgentEmail": window.NOW.user_email}));
                 } catch (error) {
                     console.log(error);
                 }
                 
         }
             else {
-                document.getElementById("errorTab").style.display = "block";
+                document.getElementById("errorTab3").style.display = "block";
                 document.getElementById("notificationTab").style.display = "none";
             }    
         }
@@ -332,7 +342,7 @@
                 profileTileRequest.open("POST", baseUrl+"/api/profile/getProfileTiles");
                 profileTileRequest.setRequestHeader("Authorization", "Bearer " + authorization);
                 profileTileRequest.setRequestHeader("X-API-KEY", authToken);
-                profileTileRequest.send(JSON.stringify({"machine": serviceTag, "nid": nid, "AgentName": window.NOW.user_name, "AgentEmail": window.NOW.user_email}));
+                profileTileRequest.send(JSON.stringify({ "scop": "machine", "scopvalue": serviceTag, "passlevel": passlevel, "machine": serviceTag, "nid": nid, "AgentName": window.NOW.user_name, "AgentEmail": window.NOW.user_email}));
             } catch (error) {
                 
             }
@@ -376,7 +386,7 @@
                 profileRequest.open("POST", baseUrl+"/api/profile/actionNotifications");
                 profileRequest.setRequestHeader("Authorization", "Bearer " + authorization);
                 profileRequest.setRequestHeader("X-API-KEY", authToken);
-                profileRequest.send(JSON.stringify({"machine": serviceTag, "shortDesc": description, "profileName": profile, "dartNumber": dart, "variable": variable, "snusername": serviceNowUsername, "details": currentntNotificationData, "nid": nid, "nocName": nocName, "AgentName": window.NOW.user_name, "AgentEmail": window.NOW.user_email}));
+                profileRequest.send(JSON.stringify({ "scop": "machine", "scopvalue": serviceTag, "passlevel": passlevel, "machine": serviceTag, "shortDesc": description, "profileName": profile, "dartNumber": dart, "variable": variable, "snusername": serviceNowUsername, "details": currentntNotificationData, "nid": nid, "nocName": nocName, "AgentName": window.NOW.user_name, "AgentEmail": window.NOW.user_email}));
             }
             catch(error){
                 console.log(error);
@@ -421,10 +431,10 @@
 			};
         }
 
-        document.getElementById('servicetagBtn').addEventListener('click', function() {
-            serviceTag = document.getElementById('servicetag').value;
+        document.getElementById('servicetagBtn3').addEventListener('click', function() {
+            serviceTag = document.getElementById('servicetag3').value;
             if (serviceTag == '') {
-                document.getElementById("servicetag").style.borderColor = "red";
+                document.getElementById("servicetag3").style.borderColor = "red";
             }
         });
 
@@ -445,6 +455,22 @@
                 obj.classList.remove('disabledclick');
             }, 400);
         }
+        
+        document.addEventListener('DOMContentLoaded', function () {
+            document.getElementById('servicetagBtn3').addEventListener('click', function() {
+                serviceTag = document.getElementById('servicetag3').value;
+                if (serviceTag == '') {
+                    document.getElementById("servicetag3").style.borderColor = "red";
+                }
+            });
+            
+            document.getElementById('sitelist3').addEventListener('change', function () {
+                passlevel =  document.getElementById('sitelist3').value;
+                document.getElementById('sitelist2').selectedIndex = document.getElementById('sitelist3').selectedIndex;
+                document.getElementById('sitelist1').selectedIndex = document.getElementById('sitelist3').selectedIndex;
+                document.getElementById('sitelist5').selectedIndex = document.getElementById('sitelist3').selectedIndex;
+            });
+        });
     </script>
 </j:jelly>]]></xml>
     </sys_ui_macro>

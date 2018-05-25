@@ -11,14 +11,14 @@
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2018-01-15 10:33:53</sys_created_on>
         <sys_id>d33066ab0f2f03007c72943be1050ef0</sys_id>
-        <sys_mod_count>67</sys_mod_count>
+        <sys_mod_count>78</sys_mod_count>
         <sys_name>Nanoheal Interactive</sys_name>
         <sys_package display_value="NanohealConnector" source="x_179178_nanohealc">9d0406230f2f03007c72943be1050e29</sys_package>
         <sys_policy>protected</sys_policy>
         <sys_scope display_value="NanohealConnector">9d0406230f2f03007c72943be1050e29</sys_scope>
         <sys_update_name>sys_ui_macro_d33066ab0f2f03007c72943be1050ef0</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2018-05-14 13:45:59</sys_updated_on>
+        <sys_updated_on>2018-05-25 10:42:26</sys_updated_on>
         <xml><![CDATA[<?xml version="1.0" encoding="utf-8" ?>
 <j:jelly trim="false" xmlns:j="jelly:core" xmlns:g="glide" xmlns:j2="null" xmlns:g2="null">
     <style>
@@ -68,15 +68,34 @@
     <div class="sn-widget sn-widget_padding-top sn-widget-textblock sn-widget-textblock_large sn-widget-textblock_center navigator-loading-message" aria-hidden="true" id="loading2">
         <span class="icon-loading"></span>Loading...
     </div>
-    <div id="errormessage2" style="display: none;margin-left: 40px;">Please Configure Nanoheal Application</div>
-    <div id="info2" style="display: none;margin-left: 40px;"></div>
-    <div id="interactiveTab" style="display: none;">
+    <div id="errormessage2" class="info-text" style="display: none;">Please Configure Nanoheal Application</div>
+    <div id="info2" class="info-text"></div>
+    
+    <div id="errorTab2" style="display: none;">
+        <h5 class="info-text" id="servicetagErrorMsg2">CI item is not selected. Please select Asset from CI or insert Service Tag below.</h5>
+        <div class="row info-text">
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                <input type="text" class="form-control" id="servicetag2" placeholder="ServiceTag" />
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" id="sitelistDiv2" style="display: none;">
+                <select class="form-control" id="sitelist2">
+                    <option value="">Select Site</option>
+                </select>
+            </div>
+            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+            <input type="button" class="btn btn-default" onclick="currentTab=2;triggerAction(getMachineDetails)"
+                    value="Submit" id="servicetagBtn2" />
+            </div>
+        </div>
+    </div> 
+    
+    <div id="interactiveTab" style="display: none;margin-top: 10px;">
         <div class="container" style="width:100%;">
         <div class="row topheader">
 			<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2"><strong>Machine Name:</strong></div>
-			<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2" id="machinename3"></div>
+			<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2" id="machinename2"></div>
 			<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2"><strong>Machine Status:</strong></div>
-			<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2" id="machinestatus3"></div>
+			<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2" id="machinestatus2"></div>
 		</div>
         <div class="resolution-page-wrap" localized="">
             <div class="row clearfix" localized="" style="width:100%;">
@@ -107,23 +126,16 @@
             </div>
         </div>
     </div>
-    <div id="errorTab1" style="display: none;">
-        <h5 style="margin-left: 15px;margin-bottom: 15px;" id="servicetagErrorMsg1">CI item is not selected. Please select Asset from CI or insert Service Tag below.</h5>
-        <div>
-            <div class="col-lg-4 col-sm-4 col-md-4 col-xs-4">
-                <input type="text" class="form-control" id="servicetag1" placeholder="ServiceTag"/><input type="button" class="btn btn-default servicetagBtn" onclick="javascript:triggerAction(getInterativeData);javascript:triggerAction(getActionHistory);javascript:triggerAction(getBasicInfo);javascript:triggerAction(getNotificationData);//javascript:triggerAction(getProvision);" value="Submit" id="servicetagBtn1" />
-            </div>
-        </div>
-    </div>    
+    
     <script type="text/javascript">
 
         function getInterativeData(sessionData) {
             var authorization = sessionData.Authorization, authToken = sessionData.AuthToken;
             if (serviceTag == '') {
-                serviceTag = document.getElementById('servicetag1').value;
+                serviceTag = document.getElementById('servicetag2').value;
             }
             if (serviceTag != "") {
-                document.getElementById("errorTab1").style.display = "none";
+                //document.getElementById("errorTab2").style.display = "none";
                 //Get Profile Data call   
                 var profileRequest = new XMLHttpRequest();
                 document.getElementById("loading2").style.display = "block";
@@ -160,7 +172,7 @@
                     profileRequest.open("POST", baseUrl+"/api/profile/getProfileData");
                     profileRequest.setRequestHeader("Authorization", "Bearer " + authorization);
                     profileRequest.setRequestHeader("X-API-KEY", authToken);
-                    profileRequest.send(JSON.stringify({"machine": serviceTag, "os": "Windows", "pageId": "1", "ossub": "NA", "AgentName": window.NOW.user_name, "AgentEmail": window.NOW.user_email}));
+                    profileRequest.send(JSON.stringify({ "scop": "machine", "scopvalue": serviceTag, "passlevel": passlevel, "machine": serviceTag, "os": "Windows", "pageId": "1", "ossub": "NA", "AgentName": window.NOW.user_name, "AgentEmail": window.NOW.user_email}));
                 } catch (error) {
                     document.getElementById('interactiveTab').style.display = 'none';
                     document.getElementById('info2').innerHTML = '<red>Something went wrong!</red>';
@@ -168,7 +180,7 @@
                 }
             }
             else {
-                document.getElementById("errorTab1").style.display = "block";
+                document.getElementById("errorTab2").style.display = "block";
                 document.getElementById("interactiveTab").style.display = "none";
             }
         }
@@ -234,7 +246,7 @@
                 profileRequest.open("POST", baseUrl+"/api/profile/getProfileData");
                 profileRequest.setRequestHeader("Authorization", "Bearer " + authorization);
                 profileRequest.setRequestHeader("X-API-KEY", authToken);
-                profileRequest.send(JSON.stringify({"machine": serviceTag, "os": "Windows", "pageId": parentId, "backId": page, "menuitem": profile, "ossub": "NA", "AgentName": window.NOW.user_name, "AgentEmail": window.NOW.user_email}));
+                profileRequest.send(JSON.stringify({ "scop": "machine", "scopvalue": serviceTag, "passlevel": passlevel, "machine": serviceTag, "os": "Windows", "pageId": parentId, "backId": page, "menuitem": profile, "ossub": "NA", "AgentName": window.NOW.user_name, "AgentEmail": window.NOW.user_email}));
             } catch (error) {
                 console.log(error);
             }
@@ -297,17 +309,26 @@
                 profileRequest.open("POST", baseUrl+"/api/profile/actionInteractive");
                 profileRequest.setRequestHeader("Authorization", "Bearer " + authorization);
                 profileRequest.setRequestHeader("X-API-KEY", authToken);
-                profileRequest.send(JSON.stringify({"machine": serviceTag, "shortDesc": description, "profileName": profile, "dartNumber": dart, "variable": variable, "snusername": serviceNowUsername, "AgentName": window.NOW.user_name, "AgentEmail": window.NOW.user_email}));
+                profileRequest.send(JSON.stringify({ "scop": "machine", "scopvalue": serviceTag, "passlevel": passlevel, "machine": serviceTag, "shortDesc": description, "profileName": profile, "dartNumber": dart, "variable": variable, "snusername": serviceNowUsername, "AgentName": window.NOW.user_name, "AgentEmail": window.NOW.user_email}));
             } catch (error) {
                 console.log(error);
             }
         }
 
-        document.getElementById('servicetagBtn1').addEventListener('click', function() {
-            serviceTag = document.getElementById('servicetag1').value;
-            if (serviceTag == '') {
-                document.getElementById("servicetag1").style.borderColor = "red";
-            }
+        document.addEventListener('DOMContentLoaded', function () {
+            document.getElementById('servicetagBtn2').addEventListener('click', function() {
+                serviceTag = document.getElementById('servicetag2').value;
+                if (serviceTag == '') {
+                    document.getElementById("servicetag2").style.borderColor = "red";
+                }
+            });
+
+            document.getElementById('sitelist2').addEventListener('change', function () {
+                passlevel =  document.getElementById('sitelist2').value;
+                document.getElementById('sitelist1').selectedIndex = document.getElementById('sitelist2').selectedIndex;
+                document.getElementById('sitelist3').selectedIndex = document.getElementById('sitelist2').selectedIndex;
+                document.getElementById('sitelist5').selectedIndex = document.getElementById('sitelist2').selectedIndex;
+            });
         });
     </script>
 </j:jelly>]]></xml>
