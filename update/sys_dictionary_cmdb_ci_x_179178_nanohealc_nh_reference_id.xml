@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <record_update>
-    <sys_dictionary action="INSERT_OR_UPDATE" element="x_179178_nanohealc_nh_reference_id" table="cmdb_ci">
+    <sys_dictionary action="INSERT_OR_UPDATE" element="x_179178_nanohealc_nh_reference_id" table="cmdb_ci_endpoint_tibco_file">
         <active>true</active>
         <array>false</array>
         <array_denormalized>false</array_denormalized>
@@ -31,7 +31,7 @@
         <internal_type display_value="String">string</internal_type>
         <mandatory>false</mandatory>
         <max_length>50</max_length>
-        <name>cmdb_ci</name>
+        <name>cmdb_ci_endpoint_tibco_file</name>
         <next_element/>
         <primary>false</primary>
         <read_only>false</read_only>
@@ -48,8 +48,8 @@
         <staged>false</staged>
         <sys_class_name>sys_dictionary</sys_class_name>
         <sys_created_by>system</sys_created_by>
-        <sys_created_on>2018-05-24 06:27:42</sys_created_on>
-        <sys_id>dc5db94ddb1213000ae0f28239961933</sys_id>
+        <sys_created_on>2018-05-24 06:27:50</sys_created_on>
+        <sys_id>ff815f45db321300738dfe1b6896194b</sys_id>
         <sys_mod_count>0</sys_mod_count>
         <sys_name>NH Reference ID</sys_name>
         <sys_package display_value="NanohealConnector" source="x_179178_nanohealc">9d0406230f2f03007c72943be1050e29</sys_package>
@@ -57,7 +57,7 @@
         <sys_scope display_value="NanohealConnector">9d0406230f2f03007c72943be1050e29</sys_scope>
         <sys_update_name>sys_dictionary_cmdb_ci_x_179178_nanohealc_nh_reference_id</sys_update_name>
         <sys_updated_by>system</sys_updated_by>
-        <sys_updated_on>2018-05-24 06:27:42</sys_updated_on>
+        <sys_updated_on>2018-06-18 09:08:39</sys_updated_on>
         <table_reference>false</table_reference>
         <text_index>false</text_index>
         <unique>false</unique>

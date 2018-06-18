@@ -11,14 +11,14 @@
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2018-01-15 10:33:53</sys_created_on>
         <sys_id>d33066ab0f2f03007c72943be1050ef0</sys_id>
-        <sys_mod_count>78</sys_mod_count>
+        <sys_mod_count>81</sys_mod_count>
         <sys_name>Nanoheal Interactive</sys_name>
         <sys_package display_value="NanohealConnector" source="x_179178_nanohealc">9d0406230f2f03007c72943be1050e29</sys_package>
         <sys_policy>protected</sys_policy>
         <sys_scope display_value="NanohealConnector">9d0406230f2f03007c72943be1050e29</sys_scope>
         <sys_update_name>sys_ui_macro_d33066ab0f2f03007c72943be1050ef0</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2018-05-25 10:42:26</sys_updated_on>
+        <sys_updated_on>2018-06-18 12:43:23</sys_updated_on>
         <xml><![CDATA[<?xml version="1.0" encoding="utf-8" ?>
 <j:jelly trim="false" xmlns:j="jelly:core" xmlns:g="glide" xmlns:j2="null" xmlns:g2="null">
     <style>
@@ -276,7 +276,7 @@
                                 var JobData = {};
                                 JobData['Type'] = 'ExecuteJob';
                                 JobData['ServiceTag'] = serviceTag;
-                                console.log(JobData);
+                                addNotes(profile+ " Tile Pushed Successfully");
                                 ws.send(JSON.stringify(JobData));
                                 thisVal.innerHTML = "Solution Pushed";
                                 thisVal.style.pointerEvents = "none";

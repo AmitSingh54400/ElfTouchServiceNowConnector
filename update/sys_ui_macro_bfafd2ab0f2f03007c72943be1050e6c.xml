@@ -11,14 +11,14 @@
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2018-01-15 10:31:20</sys_created_on>
         <sys_id>bfafd2ab0f2f03007c72943be1050e6c</sys_id>
-        <sys_mod_count>278</sys_mod_count>
+        <sys_mod_count>289</sys_mod_count>
         <sys_name>Nanoheal Basic Info</sys_name>
         <sys_package display_value="NanohealConnector" source="x_179178_nanohealc">9d0406230f2f03007c72943be1050e29</sys_package>
         <sys_policy>protected</sys_policy>
         <sys_scope display_value="NanohealConnector">9d0406230f2f03007c72943be1050e29</sys_scope>
         <sys_update_name>sys_ui_macro_bfafd2ab0f2f03007c72943be1050e6c</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2018-05-25 13:37:19</sys_updated_on>
+        <sys_updated_on>2018-06-18 12:35:27</sys_updated_on>
         <xml><![CDATA[<?xml version="1.0" encoding="utf-8" ?>
 <j:jelly trim="false" xmlns:j="jelly:core" xmlns:g="glide" xmlns:j2="null" xmlns:g2="null">
     <style>
@@ -725,12 +725,16 @@
 
             if (Status === 'Execution Completed' || Status === 'Execution Terminated' || Status === 'Execution Failed' || Status === 'System Offline') {
                 if (Status === 'System Offline') {
+                    addNotes("System Went Offline");
                     liList += '<span style="float:right;padding-right:10px;padding-bottom:5px;">System went Offline.</span>';
                 } else if (Status === 'Execution Completed') {
+                    addNotes("Solution has been executed successfully.");
                     liList += '<span style="float:right;padding-right:10px;padding-bottom:5px;">Solution has been executed successfully.</span>';
                 } else if (Status === 'Execution Terminated') {
+                    addNotes("Present solution has been cancelled");
                     liList += '<span style="float:right;padding-right:10px;padding-bottom:5px;">Present solution has been cancelled.</span>';
                 } else if (Status === 'Execution Failed') {
+                    addNotes("Solution Execution failed");
                     liList += '<span style="float:right;padding-right:10px;padding-bottom:5px;">Solution Execution failed.</span>';
                 }
             }
@@ -1021,7 +1025,6 @@
                         document.getElementById("loading5").style.display = "block";
                     getMachineDetailsRequest.onreadystatechange = function () {
                         if (getMachineDetailsRequest.readyState == XMLHttpRequest.DONE) {   // XMLHttpRequest.DONE == 4
-                            console.log("Request completed");
                             if (getMachineDetailsRequest.status == 200) {
                                 document.getElementById('info1').innerHTML = '';
                                 document.getElementById('info1').style.display = 'none';
@@ -1190,6 +1193,22 @@
                 document.getElementById("errorTab1").style.display = "block";
                 document.getElementById("basicInfoTab").style.display = "none";
             }
+        }
+        
+        function addNotes(message){
+            try {
+                var rec = new GlideRecord('incident');
+                rec.addQuery('sys_id', window.NOW.sysId);
+                rec.query();
+                if (rec.next()){
+                    rec.comments = message;
+                    rec.update();
+                }
+            }
+            catch (err) {
+                console.log("Failed to Append Activity Log");
+                Console.log(err.message);
+            }        
         }
 
     </script>
