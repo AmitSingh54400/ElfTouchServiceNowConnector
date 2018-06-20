@@ -11,14 +11,14 @@
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2018-01-15 10:31:20</sys_created_on>
         <sys_id>bfafd2ab0f2f03007c72943be1050e6c</sys_id>
-        <sys_mod_count>289</sys_mod_count>
+        <sys_mod_count>290</sys_mod_count>
         <sys_name>Nanoheal Basic Info</sys_name>
         <sys_package display_value="NanohealConnector" source="x_179178_nanohealc">9d0406230f2f03007c72943be1050e29</sys_package>
         <sys_policy>protected</sys_policy>
         <sys_scope display_value="NanohealConnector">9d0406230f2f03007c72943be1050e29</sys_scope>
         <sys_update_name>sys_ui_macro_bfafd2ab0f2f03007c72943be1050e6c</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2018-06-18 12:35:27</sys_updated_on>
+        <sys_updated_on>2018-06-20 11:58:01</sys_updated_on>
         <xml><![CDATA[<?xml version="1.0" encoding="utf-8" ?>
 <j:jelly trim="false" xmlns:j="jelly:core" xmlns:g="glide" xmlns:j2="null" xmlns:g2="null">
     <style>
@@ -173,13 +173,13 @@
                         </a>
                     </div>
                 </div>
-                <div>
+<!--                <div>
                     <div class="export" localized="" style="display: block;float: right">
                         <a href="javascript:;" onclick="openDashboard();">
                             Dashboard
                         </a>
                     </div>
-                </div>
+                </div>-->
             </div>
             <div class="panel panel-default">
                 <div class="panel-heading panelhead">User Information</div>
@@ -278,11 +278,11 @@
                     </div>
                 </div>
             </div>
-            <div class="moreinfo">
+<!--            <div class="moreinfo">
                 <a href="javascript:;" onclick="triggerAction(getMoreInfo)">
                     More Information
                 </a>
-            </div>
+            </div>-->
             <div id="moreInfoNotAvailable" style="padding-top: 5px;color: red;display: none;"></div>
         </div>
     </div>
