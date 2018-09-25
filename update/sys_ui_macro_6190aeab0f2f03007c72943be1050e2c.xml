@@ -11,14 +11,14 @@
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2018-01-15 10:35:08</sys_created_on>
         <sys_id>6190aeab0f2f03007c72943be1050e2c</sys_id>
-        <sys_mod_count>67</sys_mod_count>
+        <sys_mod_count>68</sys_mod_count>
         <sys_name>Nanoheal Action History</sys_name>
         <sys_package display_value="NanohealConnector" source="x_179178_nanohealc">9d0406230f2f03007c72943be1050e29</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="NanohealConnector">9d0406230f2f03007c72943be1050e29</sys_scope>
         <sys_update_name>sys_ui_macro_6190aeab0f2f03007c72943be1050e2c</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2018-05-25 10:42:10</sys_updated_on>
+        <sys_updated_on>2018-09-25 12:24:36</sys_updated_on>
         <xml><![CDATA[<?xml version="1.0" encoding="utf-8" ?>
 <j:jelly trim="false" xmlns:j="jelly:core" xmlns:g="glide" xmlns:j2="null" xmlns:g2="null">
     <style>
@@ -53,12 +53,12 @@
         <span class="icon-loading"></span>Loading...
     </div>
     <div id="errormessage5" class="info-text" style="display: none;">Please Configure Nanoheal Application</div>
-    <div id="info5" class="info-text"></div>
+    <h5 id="info5" class="info-text"></h5>
     <div id="errorTab5" style="display: none;">
-        <h5 class="info-text" id="servicetagErrorMsg5">CI item is not selected. Please select Asset from CI or insert Service Tag below.</h5>
+        <h5 class="info-text" id="servicetagErrorMsg5">Enter The Computer Name and Click On Submit.</h5>
         <div class="row info-text">
             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                <input type="text" class="form-control" id="servicetag5" placeholder="ServiceTag" />
+                <input type="text" class="form-control" id="servicetag5" autocomplete="off" placeholder="Computer Name" list="serviceTagList"  />
             </div>
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" id="sitelistDiv5" style="display: none;">
                 <select class="form-control" id="sitelist5">

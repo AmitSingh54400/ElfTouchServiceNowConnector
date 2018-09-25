@@ -10,7 +10,7 @@
         <next_question/>
         <order>100</order>
         <payload_name/>
-        <question display_value="Base Configuration Item" name="Base Configuration Item">d8243bf714211300651763392430a4a3</question>
+        <question display_value="Base Configuration Item" name="Base Configuration Item">2c0b19d55d121300651727c3e282e80e</question>
         <roles/>
         <script/>
         <sys_class_name>sys_wizard_answer</sys_class_name>
